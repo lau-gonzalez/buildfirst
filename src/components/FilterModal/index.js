@@ -3,7 +3,7 @@ import { discountData } from "../mockup/constants";
 import { sortData } from "../utils";
 import "./FilterModal.styles.css";
 
-export const FilterModal = ({ setOpenFilterSection, setCardsToShow }) => {
+const FilterModal = ({ setOpenFilterSection, setCardsToShow }) => {
   const [optionSelected, setOptionSelected] = useState("recomended");
 
   const handleSetOption = (e) => {
@@ -12,9 +12,8 @@ export const FilterModal = ({ setOpenFilterSection, setCardsToShow }) => {
 
   const handleApplyFilters = () => {
     const newData = sortData(optionSelected, discountData);
-    setOpenFilterSection(false);
-    console.log(newData);
     setCardsToShow(newData);
+    setOpenFilterSection(false);
   };
 
   return (
@@ -36,10 +35,9 @@ export const FilterModal = ({ setOpenFilterSection, setCardsToShow }) => {
                 name="recomended"
                 value="recomended"
                 onChange={handleSetOption}
-                defaultChecked
                 checked={optionSelected === "recomended"}
               />
-              <label for="recomended">Recomended</label>
+              <label>Recomended</label>
             </div>
             <div>
               <input
@@ -50,7 +48,7 @@ export const FilterModal = ({ setOpenFilterSection, setCardsToShow }) => {
                 onChange={handleSetOption}
                 checked={optionSelected === "a-z"}
               />
-              <label for="a-z">A - Z</label>
+              <label>A - Z</label>
             </div>
             <div>
               <input
@@ -61,7 +59,7 @@ export const FilterModal = ({ setOpenFilterSection, setCardsToShow }) => {
                 onChange={handleSetOption}
                 checked={optionSelected === "z-a"}
               />
-              <label for="z-a">Z - A</label>
+              <label>Z - A</label>
             </div>
             <div>
               <input
@@ -72,7 +70,7 @@ export const FilterModal = ({ setOpenFilterSection, setCardsToShow }) => {
                 onChange={handleSetOption}
                 checked={optionSelected === "greatest"}
               />
-              <label for="greatest">Greatest Saving</label>
+              <label>Greatest Saving</label>
             </div>
           </div>
         </div>
@@ -80,7 +78,7 @@ export const FilterModal = ({ setOpenFilterSection, setCardsToShow }) => {
           <h3>Seller</h3>
           <div>
             {discountData.map((item) => (
-              <div>
+              <div key={item.providerName}>
                 <span>{item.providerName}</span>;
               </div>
             ))}
@@ -91,3 +89,5 @@ export const FilterModal = ({ setOpenFilterSection, setCardsToShow }) => {
     </div>
   );
 };
+
+export default FilterModal;

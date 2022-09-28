@@ -7,7 +7,6 @@ export const filterCards = (data, searchValue) => {
       card.save.toLowerCase().includes(value) ||
       card.description.toLowerCase().includes(value)
   );
-  console.log(newCards);
 
   return newCards;
 };

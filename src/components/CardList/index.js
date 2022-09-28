@@ -5,13 +5,16 @@ import "./CardList.styles.css";
 import { filterCards } from "../utils";
 
 const CardList = ({ searchValue, cardsToShow, setCardsToShow }) => {
-  console.log(cardsToShow);
   useEffect(() => {
     if (discountData.length && searchValue) {
       const newCards = filterCards(discountData, searchValue);
       setCardsToShow(newCards);
     }
-  }, [searchValue]);
+
+    if (!searchValue) {
+      setCardsToShow(discountData);
+    }
+  }, [searchValue, setCardsToShow]);
 
   return (
     <div className="container">
