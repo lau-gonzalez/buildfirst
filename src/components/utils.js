@@ -11,3 +11,38 @@ export const filterCards = (data, searchValue) => {
 
   return newCards;
 };
+
+export const sortData = (option, data) => {
+  const field = option === "greatest" ? "save" : "providerName";
+  let sortedData = [];
+
+  if (option === "z-a") {
+    sortedData = data.sort((a, b) => {
+      if (a[field] > b[field]) {
+        return -1;
+      }
+
+      if (a[field] < b[field]) {
+        return 1;
+      }
+
+      return 0;
+    });
+
+    return sortedData;
+  }
+
+  sortedData = data.sort((a, b) => {
+    if (a[field] > b[field]) {
+      return 1;
+    }
+
+    if (a[field] < b[field]) {
+      return -1;
+    }
+
+    return 0;
+  });
+
+  return sortedData;
+};

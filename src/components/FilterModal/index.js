@@ -1,56 +1,21 @@
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import { discountData } from "../mockup/constants";
+import { sortData } from "../utils";
 import "./FilterModal.styles.css";
 
-// sortedData [{char: A, value: [name1, name2]}];
-
-const sortData = (option) => {
-  const field = option === "greatest" ? "save" : "providerName";
-  let sortedData = [];
-
-  if (option === "z-a") {
-    sortedData = discountData.sort((a, b) => {
-      if (a[field] > b[field]) {
-        return -1;
-      }
-
-      if (a[field] < b[field]) {
-        return 1;
-      }
-
-      return 0;
-    });
-
-    return sortedData;
-  }
-
-  sortedData = discountData.sort((a, b) => {
-    if (a[field] > b[field]) {
-      return 1;
-    }
-
-    if (a[field] < b[field]) {
-      return -1;
-    }
-
-    return 0;
-  });
-
-  return sortedData;
-};
-
-export const FilterModal = ({ setOpenFilterSection }) => {
+export const FilterModal = ({ setOpenFilterSection, setCardsToShow }) => {
   const [optionSelected, setOptionSelected] = useState("recomended");
-  const [sortedData, setSortedData] = useState(sortData(optionSelected));
 
   const handleSetOption = (e) => {
     setOptionSelected(e.target.value);
   };
 
-  useEffect(() => {
-    const newSortData = sortData(optionSelected);
-    setSortedData(newSortData);
-  }, [optionSelected]);
+  const handleApplyFilters = () => {
+    const newData = sortData(optionSelected, discountData);
+    setOpenFilterSection(false);
+    console.log(newData);
+    setCardsToShow(newData);
+  };
 
   return (
     <div className="modal">
@@ -114,13 +79,14 @@ export const FilterModal = ({ setOpenFilterSection }) => {
         <div>
           <h3>Seller</h3>
           <div>
-            {sortedData.map((item) => (
+            {discountData.map((item) => (
               <div>
                 <span>{item.providerName}</span>;
               </div>
             ))}
           </div>
         </div>
+        <button onClick={handleApplyFilters}>APPLY</button>
       </div>
     </div>
   );

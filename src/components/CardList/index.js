@@ -1,20 +1,15 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect } from "react";
 import { discountData } from "../mockup/constants";
 import Card from "../Card";
 import "./CardList.styles.css";
 import { filterCards } from "../utils";
 
-const CardList = ({ searchValue }) => {
-  const [cardsToShow, setCardsToShow] = useState(discountData);
-
+const CardList = ({ searchValue, cardsToShow, setCardsToShow }) => {
+  console.log(cardsToShow);
   useEffect(() => {
     if (discountData.length && searchValue) {
       const newCards = filterCards(discountData, searchValue);
       setCardsToShow(newCards);
-    }
-
-    if (!searchValue) {
-      setCardsToShow(discountData);
     }
   }, [searchValue]);
 
