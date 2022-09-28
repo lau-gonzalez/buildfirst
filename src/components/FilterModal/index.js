@@ -3,7 +3,11 @@ import { discountData } from "../mockup/constants";
 import { sortData } from "../utils";
 import "./FilterModal.styles.css";
 
-const FilterModal = ({ setOpenFilterSection, setCardsToShow }) => {
+const FilterModal = ({
+  setOpenFilterSection,
+  openFilterSection,
+  setSortedData,
+}) => {
   const [optionSelected, setOptionSelected] = useState("recomended");
 
   const handleSetOption = (e) => {
@@ -12,12 +16,15 @@ const FilterModal = ({ setOpenFilterSection, setCardsToShow }) => {
 
   const handleApplyFilters = () => {
     const newData = sortData(optionSelected, discountData);
-    setCardsToShow(newData);
+    setSortedData(newData);
     setOpenFilterSection(false);
   };
 
   return (
-    <div className="modal">
+    <div
+      className="modal"
+      style={{ display: openFilterSection ? "block" : "none" }}
+    >
       <div className="modal-content">
         <div>
           <span

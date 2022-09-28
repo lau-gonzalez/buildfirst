@@ -6,14 +6,16 @@ import CardList from "./components/CardList";
 const App = () => {
   const [searchValue, setSearchValue] = useState("");
   const [cardsToShow, setCardsToShow] = useState([]);
+  const [sortedData, setSortedData] = useState([]);
 
   return (
     <div className="App">
-      <Navbar setSearchValue={setSearchValue} setCardsToShow={setCardsToShow} />
+      <Navbar setSearchValue={setSearchValue} setSortedData={setSortedData} />
       <CardList
         searchValue={searchValue}
         cardsToShow={cardsToShow}
         setCardsToShow={setCardsToShow}
+        sortedData={sortedData}
       />
     </div>
   );

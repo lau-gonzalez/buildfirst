@@ -4,7 +4,7 @@ import searchIcon from "../../assets/search.jpg";
 import filterIcon from "../../assets/filter.png";
 import FilterModal from "../FilterModal";
 
-const Search = ({ setSearchValue, setCardsToShow }) => {
+const Search = ({ setSearchValue, setSortedData }) => {
   const [openFilterSection, setOpenFilterSection] = useState(false);
 
   const handleOnChange = (e) => {
@@ -23,12 +23,11 @@ const Search = ({ setSearchValue, setCardsToShow }) => {
         alt="filter"
         onClick={handleOpenFilter}
       />
-      {openFilterSection && (
-        <FilterModal
-          setOpenFilterSection={setOpenFilterSection}
-          setCardsToShow={setCardsToShow}
-        />
-      )}
+      <FilterModal
+        setOpenFilterSection={setOpenFilterSection}
+        openFilterSection={openFilterSection}
+        setSortedData={setSortedData}
+      />
     </div>
   );
 };

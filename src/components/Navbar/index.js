@@ -2,11 +2,11 @@ import React from "react";
 import Search from "../Search";
 import "./Navbar.styles.css";
 
-const Navbar = ({ setSearchValue, setCardsToShow }) => {
+const Navbar = ({ setSearchValue, setSortedData }) => {
   return (
     <div className="navbar-container">
       <h1>Builtfirst</h1>
-      <Search setSearchValue={setSearchValue} setCardsToShow={setCardsToShow} />
+      <Search setSearchValue={setSearchValue} setSortedData={setSortedData} />
     </div>
   );
 };

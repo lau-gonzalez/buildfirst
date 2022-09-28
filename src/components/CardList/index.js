@@ -4,7 +4,13 @@ import Card from "../Card";
 import "./CardList.styles.css";
 import { filterCards } from "../utils";
 
-const CardList = ({ searchValue, cardsToShow, setCardsToShow }) => {
+const CardList = ({ searchValue, cardsToShow, setCardsToShow, sortedData }) => {
+  useEffect(() => {
+    if (sortedData.length) {
+      setCardsToShow(sortedData);
+    }
+  }, [setCardsToShow, sortedData]);
+
   useEffect(() => {
     if (discountData.length && searchValue) {
       const newCards = filterCards(discountData, searchValue);
