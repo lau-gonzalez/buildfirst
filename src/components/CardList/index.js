@@ -1,30 +1,27 @@
-import React, { useEffect } from "react";
+import React, { useContext, useEffect } from "react";
 import { discountData } from "../mockup/constants";
 import Card from "../Card";
 import "./CardList.styles.css";
 import { filterCards } from "../utils";
+import { DataContext } from "../../hooks/DataContext";
 
-const CardList = ({ searchValue, cardsToShow, setCardsToShow, sortedData }) => {
-  useEffect(() => {
-    if (sortedData.length) {
-      setCardsToShow(sortedData);
-    }
-  }, [setCardsToShow, sortedData]);
+const CardList = ({ searchValue }) => {
+  const [context, setContext] = useContext(DataContext);
 
   useEffect(() => {
     if (discountData.length && searchValue) {
       const newCards = filterCards(discountData, searchValue);
-      setCardsToShow(newCards);
+      setContext(newCards);
     }
 
     if (!searchValue) {
-      setCardsToShow(discountData);
+      setContext(discountData);
     }
-  }, [searchValue, setCardsToShow]);
+  }, [searchValue, setContext]);
 
   return (
     <div className="container">
-      {cardsToShow.map((card) => (
+      {context.map((card) => (
         <Card key={card.title} data={card} />
       ))}
     </div>

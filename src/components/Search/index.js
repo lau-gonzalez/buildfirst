@@ -2,11 +2,8 @@ import React, { useState } from "react";
 import "./Search.styles.css";
 import searchIcon from "../../assets/search.jpg";
 import filterIcon from "../../assets/filter.png";
-import FilterModal from "../FilterModal";
 
-const Search = ({ setSearchValue, setSortedData }) => {
-  const [openFilterSection, setOpenFilterSection] = useState(false);
-
+const Search = ({ setSearchValue, setOpenFilterSection }) => {
   const handleOnChange = (e) => {
     setSearchValue(e.target.value);
   };
@@ -22,11 +19,6 @@ const Search = ({ setSearchValue, setSortedData }) => {
         src={filterIcon}
         alt="filter"
         onClick={handleOpenFilter}
-      />
-      <FilterModal
-        setOpenFilterSection={setOpenFilterSection}
-        openFilterSection={openFilterSection}
-        setSortedData={setSortedData}
       />
     </div>
   );

@@ -21,3 +21,11 @@
   width: 80%; /* Could be more or less, depending on screen size */
   height: 400px;
 }
+
+.seller-column {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  height: 300px;
+  width: 400px;
+}

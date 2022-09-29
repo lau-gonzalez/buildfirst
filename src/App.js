@@ -2,22 +2,26 @@ import React, { useState } from "react";
 import "./App.css";
 import Navbar from "./components/Navbar";
 import CardList from "./components/CardList";
+import { DataContext } from "./hooks/DataContext";
+import FilterModal from "./components/FilterModal";
 
 const App = () => {
   const [searchValue, setSearchValue] = useState("");
   const [cardsToShow, setCardsToShow] = useState([]);
-  const [sortedData, setSortedData] = useState([]);
+  const [openFilterSection, setOpenFilterSection] = useState(false);
 
   return (
-    <div className="App">
-      <Navbar setSearchValue={setSearchValue} setSortedData={setSortedData} />
-      <CardList
-        searchValue={searchValue}
-        cardsToShow={cardsToShow}
-        setCardsToShow={setCardsToShow}
-        sortedData={sortedData}
+    <DataContext.Provider value={[cardsToShow, setCardsToShow]}>
+      <Navbar
+        setSearchValue={setSearchValue}
+        setOpenFilterSection={setOpenFilterSection}
       />
-    </div>
+      <CardList searchValue={searchValue} />
+      <FilterModal
+        setOpenFilterSection={setOpenFilterSection}
+        openFilterSection={openFilterSection}
+      />
+    </DataContext.Provider>
   );
 };
 
